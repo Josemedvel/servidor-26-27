@@ -1,0 +1,29 @@
+# Composer
+**/vendor/
+composer.phar
+
+# Environment & secrets
+**/.env
+
+# Cache, logs y temporales
+**/var/cache/
+**/var/log/
+**/storage/
+**/tmp/
+**/temp/
+**/*.log
+**/cache/
+
+# PHPUnit / tests
+**/phpunit.xml
+**/.phpunit.result.cache
+**/coverage/
+**/build/
+
+# IDEs y editores
+.vscode/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
