@@ -3,6 +3,21 @@
         <title>title</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"><!-- comment -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <style>
+            body{
+                margin:0;
+                padding:0;
+                background-color: <?php 
+                $colores = ["red", "blue", "black"];
+                echo $colores[rand(0,2)];
+                ?>;
+            }
+        </style>
+        <script>
+         setInterval(function (){
+             fetch("http://localhost/serv-26-27/ut3/cond_rend/");
+         },1000);
+        </script>
     </head>
     <body>
 
@@ -110,14 +125,14 @@ $fotos = ["https://media.istockphoto.com/id/525982128/es/foto/la-gato-agresivida
             $i++;
         }
       ?> */
-      
-        $i = 0;
+      // carrusel comentado
+        /*$i = 0;
         while($i < count($fotos)){
             echo "<div class=\"carousel-item active\">";
             echo '<img src="' . $fotos[$i] . '" class="d-block w-100">';
             echo "</div>";
             $i++;
-        }
+        }*/
       ?>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -129,7 +144,58 @@ $fotos = ["https://media.istockphoto.com/id/525982128/es/foto/la-gato-agresivida
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-    </body>
+
+
+
+<?php
+$nombres = ["Marta", "Alberto", "Rubén", "María"];
+echo "<ol>";
+foreach($nombres as $v){
+    echo "<li>$v</li>";
+}
+echo "</ol>";
+
+echo "<ol>";
+foreach($nombres as $v):?>
+    <li><?=$v?></li>
+<?php    endforeach;?>
+</ol>
+<?php
+echo "<ol>";
+foreach($nombres as $k => $v){
+    echo "<li>$k => $v</li>";
+}
+echo "</ol>";
+print_r($nombres);
+?>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th colspan="1">
+                ID
+            </th>
+            <th colspan="2">
+                Nombre
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        foreach($nombres as $i => $v):?>
+        <tr>
+            <td>
+                <?=$i?>
+            </td>
+            <td>
+                <?=$v?>
+            </td>
+        </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>
+
+</body>
 </html>
 
 
