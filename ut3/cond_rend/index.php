@@ -100,10 +100,21 @@ $fotos = ["https://media.istockphoto.com/id/525982128/es/foto/la-gato-agresivida
 <div id="carouselExample" class="carousel slide">
   <div class="carousel-inner">
       <?php
+      /*<?php 
+        $i = 0;
+        while($i < count($fotos)){?>
+            <div class="carousel-item active">
+            <img src="<?=$fotos[$i]?>" class="d-block w-100">
+            </div>
+            <?php
+            $i++;
+        }
+      ?> */
+      
         $i = 0;
         while($i < count($fotos)){
             echo "<div class=\"carousel-item active\">";
-            echo "<img src=\"" . $fotos[$i] . "\" class=\"d-block w-100\">";
+            echo '<img src="' . $fotos[$i] . '" class="d-block w-100">';
             echo "</div>";
             $i++;
         }
