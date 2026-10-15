@@ -40,3 +40,6 @@ function bubble($numeros){
 }
 
 echo implode(" --> ", bubble($numeros));
+?>
+<br>
+<a href="form_numero_numeros.php">Volver a calcular</a>
