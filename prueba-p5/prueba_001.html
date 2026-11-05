@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo p5.js</title>
+</head>
+<body>
+    <h2 id="valor-json"></h2>
+    <script src="https://cdn.jsdelivr.net/npm/p5@2.3.3/lib/p5.min.js"></script>
+    <script>
+
+        let screenWidth = 400
+        let screenHeight = 300
+        let side = 200
+        let puntos = [];
+        let errorCarga = "";
+
+        function setup() {
+            createCanvas(screenWidth, screenHeight);
+            fetch("../ut3/arrays/devuelveArrayJson.php")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error HTTP: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (!Array.isArray(data.points)) {
+                        throw new Error("El JSON no contiene un arreglo 'points'.");
+                    }
+                    puntos = data.points;
+                    document.getElementById("valor-json").textContent = data.res;
+                })
+                .catch(error => {
+                    errorCarga = error.message;
+                    console.error("No se pudieron cargar los puntos:", error);
+                });
+        }
+
+        function draw() {
+            background(230);
+            rectMode("center");
+            noFill();
+            stroke(0);
+            rect(screenWidth / 2, screenHeight / 2, side);
+            circle(screenWidth / 2, screenHeight / 2, side);
+            fill(255, 0, 0);
+            noStroke();
+            puntos.forEach(([x, y]) => {
+                circle(screenWidth / 2 + x * side / 2, screenHeight / 2 + y * side / 2, 3);
+            });
+            if (errorCarga) {
+                fill(0);
+                text(errorCarga, 10, screenHeight - 10);
+            }
+        }
+    </script>
+</body>
+</html>
