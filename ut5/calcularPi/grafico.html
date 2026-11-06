@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculo de Pi</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script src="p5.js"></script>
+        <p>Ingrese el numero de dardos:<input id="numero" type="number" name="numero"><button id="enviarForm">Enviar</button></p>
+       
+        <script>
+        let screenWidth = 400
+        let screenHeight = 300
+        let side = 200
+        let puntos = [];
+        let resultado = "";
+        let errorCarga = "";
+        
+        let button = document.getElementById("enviarForm")
+        button.addEventListener("click", function (){
+            let valor = document.getElementById("numero").value
+            console.log(valor)
+            fetch("./Main.php?dardos=" + valor)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error HTTP: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (!Array.isArray(data.dardos)) {
+                        throw new Error("El JSON no contiene un arreglo 'points'.");
+                    }
+                    puntos = data.dardos;
+                    document.getElementById("valor-json").textContent = data.resultado;
+                })
+                .catch(error => {
+                    errorCarga = error.message;
+                    console.error("No se pudieron cargar los puntos:", error);
+                });
+        })
+        
+        
+        
+        function setup() {
+            createCanvas(screenWidth, screenHeight);
+        }
+
+        function draw() {
+            background(230);
+            rectMode("center");
+            noFill();
+            stroke(0);
+            rect(screenWidth / 2, screenHeight / 2, side);
+            circle(screenWidth / 2, screenHeight / 2, side);
+            fill(255, 0, 0);
+            noStroke();
+            puntos.forEach((p) => {
+                circle(screenWidth / 2 + p.x * side / 2, screenHeight / 2 + p.y * side / 2, 2);
+            });
+            if (errorCarga) {
+                fill(0);
+                text(errorCarga, 10, screenHeight - 10);
+            }
+        }
+        </script>
+        <h2 id="valor-json"></h2>
+    </body>
+</html>
