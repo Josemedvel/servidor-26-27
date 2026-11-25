@@ -10,7 +10,7 @@ class Conexion{
         string $username,
         string $password,
         string $db,
-        int $port = 3306
+        int $port = 3307
     ) {
         $this->conn = new mysqli($host, $username, $password, $db, $port);
 
@@ -27,8 +27,8 @@ class Conexion{
         string $host = 'localhost',
         string $username = 'root',
         string $password = '',
-        string $db = 'tu_base_de_datos',
-        int $port = 3306
+        string $db = 'prueba',
+        int $port = 3307
     ): Conexion {
         if (self::$instance === null) {
             self::$instance = new self($host, $username, $password, $db, $port);
